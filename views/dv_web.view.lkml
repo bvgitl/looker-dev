@@ -41,7 +41,7 @@ view: dv_web {
   }
 
   measure: sum_total_ht {
-    type: sum_distinct
+    type: sum
     sql_distinct_key: ${code_magasin} ;;
     sql: ${total_ht} ;;
   }
