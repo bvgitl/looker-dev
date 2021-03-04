@@ -29,8 +29,8 @@ view: vte_mag {
   }
 
   dimension: id_tf_vte {
-    primary_key: yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.id_tf_vte ;;
   }
 
