@@ -15,6 +15,8 @@ view: dv_vente {
        ;;
   }
 
+  # commentaire
+
   measure: count {
     hidden: yes
     type: count
