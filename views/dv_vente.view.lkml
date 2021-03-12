@@ -1,6 +1,8 @@
 view: dv_vente {
   derived_table: {
-    sql: select
+    # datagroup_trigger: minuit_quotidien
+    sql:
+      select
         id_tf_vte,
         id_magasin,
         typ_vente,
@@ -15,13 +17,14 @@ view: dv_vente {
        ;;
   }
 
-  # commentaire
+  ### MESURES {
 
   measure: count {
     hidden: yes
     type: count
     drill_fields: [detail*]
   }
+##}
 
   dimension: id_tf_vte {
     primary_key: yes
@@ -40,8 +43,21 @@ view: dv_vente {
   }
 
   dimension_group: dte_vente {
+    convert_tz: no
     type: time
-    timeframes: [date, week, week_of_year ,month, month_name , year, raw, fiscal_month_num, fiscal_quarter, fiscal_quarter_of_year, fiscal_year]
+    timeframes: [
+      date,
+      week,
+      week_of_year,
+      month,
+      month_name,
+      year,
+      raw,
+      fiscal_month_num,
+      fiscal_quarter,
+      fiscal_quarter_of_year,
+      fiscal_year
+    ]
     datatype: date
     sql: ${TABLE}.dte_vente ;;
   }

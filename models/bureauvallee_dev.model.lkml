@@ -9,6 +9,11 @@ datagroup: bureauvallee_dev_default_datagroup {
   max_cache_age: "24 hour"
 }
 
+datagroup: minuit_quotidien {
+  sql_trigger: SELECT CURRENT_DATE('Europe/Paris')  ;;
+  max_cache_age: "48 hours"
+}
+
 persist_with: bureauvallee_dev_default_datagroup
 
 explore: dv_vente {
