@@ -11,14 +11,27 @@ datagroup: bureauvallee_dev_default_datagroup {
 
 persist_with: bureauvallee_dev_default_datagroup
 
-explore: commandes {}
 
-explore: magasins {}
+explore: produit_commande {
+  join: commandes {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${produit_commande.cd_commande}=${commandes.cd_commande} ;;
+  }
+}
 
-explore: produit_commande {}
-
-explore: tf_vente {}
+explore: tf_vente {
+  join: magasins {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${tf_vente.cd_site_ext}=${magasins.cd_comptable} ;;
+  }
+}
 
 explore: tf_vente_mag {}
 
 explore: ventes_devise {}
+
+explore: commandes {}
+
+explore: magasins {}

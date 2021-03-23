@@ -1,13 +1,22 @@
 view: tf_vente_mag {
-  sql_table_name: `bv-prod.Matillion_Temp_Table.TF_VENTE_MAG`
+  sql_table_name: `bv-prod.Matillion_Perm_Table.TF_VENTE_MAG`
     ;;
 
+  dimension: compound_primary_key {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql: CONCAT(${cd_site_ext}, ' ',${dte_vte_date}, ' ',${typ_vente}) ;;
+  }
+
   dimension: an_sem {
+    hidden: yes
     type: string
     sql: ${TABLE}.An_Sem ;;
   }
 
   dimension: annee {
+    hidden: yes
     type: string
     sql: ${TABLE}.Annee ;;
   }
@@ -68,6 +77,7 @@ view: tf_vente_mag {
   }
 
   dimension: jour {
+    hidden: yes
     type: string
     sql: ${TABLE}.Jour ;;
   }
@@ -78,6 +88,7 @@ view: tf_vente_mag {
   }
 
   dimension: mois {
+    hidden: yes
     type: string
     sql: ${TABLE}.Mois ;;
   }
@@ -88,6 +99,7 @@ view: tf_vente_mag {
   }
 
   dimension: num_jour {
+    hidden: yes
     type: string
     sql: ${TABLE}.Num_Jour ;;
   }
@@ -98,11 +110,13 @@ view: tf_vente_mag {
   }
 
   dimension: qtite_uvc {
+    hidden: yes
     type: number
     sql: ${TABLE}.Qtite_uvc ;;
   }
 
   dimension: typ_article {
+    hidden: yes
     type: string
     sql: ${TABLE}.Typ_Article ;;
   }

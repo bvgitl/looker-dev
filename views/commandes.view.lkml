@@ -1,45 +1,53 @@
 view: commandes {
-  sql_table_name: `bv-prod.Matillion_Temp_Table.commandes`
+  sql_table_name: `bv-prod.Matillion_Perm_Table.commandes`
     ;;
+
+
+  dimension: cd_commande {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.cd_commande ;;
+  }
 
   dimension: canal_commande {
     type: string
     sql: ${TABLE}.Canal_commande ;;
   }
 
-  dimension: created_at {
+
+  dimension: cd_magasin {
     type: string
-    sql: ${TABLE}.created_at ;;
+    sql: ${TABLE}.cd_magasin ;;
   }
 
   dimension: customer_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension: entity_id {
-    type: string
-    sql: ${TABLE}.entity_id ;;
+  dimension_group: dte_commande {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.dte_commande ;;
   }
 
-  dimension: shipping_method {
+  dimension: methode_livraison {
     type: string
-    sql: ${TABLE}.Shipping_method ;;
+    sql: ${TABLE}.methode_livraison ;;
   }
 
-  dimension: shop_code {
+  dimension: statut {
     type: string
-    sql: ${TABLE}.Shop_code ;;
-  }
-
-  dimension: status {
-    type: string
-    sql: ${TABLE}.status ;;
-  }
-
-  dimension: store_code {
-    type: string
-    sql: ${TABLE}.store_code ;;
+    sql: ${TABLE}.statut ;;
   }
 
   dimension: tarif_ht_livraison {

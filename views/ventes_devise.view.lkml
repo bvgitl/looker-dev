@@ -1,6 +1,13 @@
 view: ventes_devise {
-  sql_table_name: `bv-prod.Matillion_Temp_Table.ventes_devise`
+  sql_table_name: `bv-prod.Matillion_Perm_Table.ventes_devise`
     ;;
+
+  dimension: compound_primary_key {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql: CONCAT(${cd_magasin}, ' ',${dte_vente_date}) ;;
+  }
 
   dimension: cd_devise {
     type: string
@@ -12,8 +19,18 @@ view: ventes_devise {
     sql: ${TABLE}.cd_magasin ;;
   }
 
-  dimension: dte_vente {
-    type: string
+  dimension_group: dte_vente {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.dte_vente ;;
   }
 

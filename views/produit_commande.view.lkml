@@ -1,15 +1,15 @@
 view: produit_commande {
-  sql_table_name: `bv-prod.Matillion_Temp_Table.produit_commande`
+  sql_table_name: `bv-prod.Matillion_Perm_Table.produit_commande`
     ;;
 
-  dimension: order_id {
+  dimension: cd_commande {
     type: string
-    sql: ${TABLE}.order_id ;;
+    sql: ${TABLE}.cd_commande ;;
   }
 
-  dimension: product_id {
+  dimension: cd_produit {
     type: string
-    sql: ${TABLE}.product_id ;;
+    sql: ${TABLE}.cd_produit ;;
   }
 
   dimension: quantite_commandee {
