@@ -231,17 +231,7 @@ view: tf_vente {
       ;;
   }
 
-  #parameter: select {
-  #  type: unquoted
-  #  allowed_value: {
-  #    label: "France Métropole  (Hors Dom)"
-  #    value: "FR"
-  #  }
-  #  allowed_value: {
-  #    label: "L'international"
-  #    value: "cost"
-  #  }
-  #}
+
 
   dimension: select_region {
     sql: CASE
@@ -358,16 +348,6 @@ view: tf_vente {
     sql: ${magasins.surf_vte};;
   }
 
-  # measure: sum_CA_drive_select_mois {
-  #   type: sum
-  #   value_format_name: eur
-  #   label: "CA Drive"
-  #   sql: CASE
-  #           WHEN {% condition date_filter %} CAST(${dv_web.date_de_commande_date} AS TIMESTAMP)  {% endcondition %}
-  #           THEN ${dv_web.total_ht}
-  #         END ;;
-  # }
-
   measure: ecarts_jour_select_mois {
     label: "écart jr"
     type: number
@@ -429,26 +409,6 @@ view: tf_vente {
           END ;;
   }
 
-  # measure: sum_surf_select_mois_N1 {
-  #   hidden: yes
-  #   type: average
-  #   sql: CASE
-  #           WHEN {% condition date_filter_1 %} CAST(${dte_vte_date} AS TIMESTAMP)  {% endcondition %}
-  #           THEN ${surf_vte}
-  #         END ;;
-  # }
-
-  # measure: sum_CA_drive_select_mois_N1 {
-  #   type: sum
-  #   value_format_name: eur
-  #   label: "CA Drive n-1"
-  #   sql: CASE
-  #           WHEN {% condition date_filter_1 %} CAST(${dv_web.date_de_commande_date} AS TIMESTAMP)  {% endcondition %}
-  #           THEN ${dv_web.total_ht}
-  #         END ;;
-  # }
-
-
 
   ############## calcul des KPIs à n-2 de la période sélectionnée au niveau du filtre ##############
 
@@ -502,26 +462,6 @@ view: tf_vente {
             THEN ${val_achat_gbl}
           END ;;
   }
-
-  # measure: sum_surf_select_mois_N2 {
-  #   hidden: yes
-  #   type: average
-  #   sql: CASE
-  #         WHEN {% condition date_filter_2 %} CAST(${dte_vente_date} AS TIMESTAMP)  {% endcondition %}
-  #         THEN ${surf_vte}
-  #         END ;;
-  # }
-
-  #measure: sum_CA_drive_select_mois_N2 {
-  #  type: sum
-  #  hidden: yes
-  #  value_format_name: eur
-  #  label: "CA Drive n-2"
-  #   sql: CASE
-  #          WHEN {% condition date_filter_2 %} CAST(${dv_web.date_de_commande_date} AS TIMESTAMP)  {% endcondition %}
-  #          THEN ${dv_web.total_ht}
-  #        END ;;
-  #}
 
 
   ############ calcul des KPIs à n-3 de la période sélectionnée au niveau du filtre ###############
@@ -577,26 +517,6 @@ view: tf_vente {
           END ;;
   }
 
-  # measure: sum_surf_select_mois_N3 {
-  #   hidden: yes
-  #   type: average
-  #   sql: CASE
-  #           WHEN {% condition date_filter_3 %} CAST(${dte_vte_date} AS TIMESTAMP)  {% endcondition %}
-  #           THEN ${surf_vte}
-  #         END ;;
-  # }
-
-  # measure: sum_CA_drive_select_mois_N3 {
-  #   type: sum
-  #   hidden: yes
-  #   value_format_name: eur
-  #   label: "CA Drive n-3"
-  #   sql: CASE
-  #           WHEN {% condition date_filter_3 %} CAST(${dte_vte_date} AS TIMESTAMP)  {% endcondition %}
-  #           THEN ${dv_web.total_ht}
-  #         END ;;
-  # }
-
 
   ######### calcul des rapports entre les KPIs à la période n sélectionnée au niveau du filtre  ##########
 
@@ -635,13 +555,6 @@ view: tf_vente {
     type: number
     sql:  ${sum_CA_select_mois}/NULLIF(${sum_nb_ticket_select_mois},0) ;;
   }
-
-  #measure: panier_moyen_drive_select_mois {
-  #  label: "PM Drive"
-  #  value_format_name: decimal_2
-  #  type: number
-  #  sql:  ${sum_CA_drive_select_mois}/NULLIF(${sum_nb_ticket_select_mois},0) ;;
-  #}
 
   measure: marge_par_client_select_mois {
     label: "marge / clts"
@@ -807,13 +720,6 @@ view: tf_vente {
     sql:  1.0 * (${sum_marge_select_mois}-${sum_marge_select_mois_N1})/NULLIF(${sum_marge_select_mois_N1},0);;
   }
 
-  # measure: prog_CA_drive_select_mois {
-  #   label: "prog CA Drive"
-  #   value_format_name: percent_2
-  #   type: number
-  #   sql: 1.0 * (${sum_CA_drive_select_mois}-${sum_CA_drive_select_mois_N1})/NULLIF(${sum_CA_drive_select_mois_N1},0);;
-  # }
-
   measure: prog_taux_marge_select_mois {
     label: "prog %marge"
     value_format_name: percent_2
@@ -946,13 +852,6 @@ view: tf_vente {
     type: number
     sql: 1.0 * (${sum_CA_select_mois_N2}-${sum_CA_select_mois_N3})/NULLIF(${sum_CA_select_mois_N3},0);;
   }
-
-  #measure: prog_CA_drive_select_mois_N2 {
-  #  label: "prog CA Drive n-2"
-  #  value_format_name: percent_2
-  #  type: number
-  #  sql: 1.0 * (${sum_CA_drive_select_mois_N2}-${sum_CA_drive_select_mois_N3})/NULLIF(${sum_CA_drive_select_mois_N3},0);;
-  #}
 
   measure: prog_marge_select_mois_N2 {
     label: "prog marge n-2"
