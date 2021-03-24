@@ -209,7 +209,7 @@ view: tf_vente {
     label: "Catégorie"
     sql:
         CASE
-          WHEN ${magasins.typ_mag} = "S" THEN "P. non comparable"
+          WHEN ${magasins.ferme} = "S" THEN "P. non comparable"
           ELSE (
             CASE
               WHEN ${magasins.date_ouv_raw} < CAST({% date_start date_filter_3 %} AS DATETIME) THEN "P.Comparable"
