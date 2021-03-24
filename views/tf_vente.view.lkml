@@ -212,7 +212,7 @@ view: tf_vente {
           WHEN ${magasins.ferme} = "S" THEN "P. non comparable"
           ELSE (
             CASE
-              WHEN ${magasins.date_ouv_raw} < CAST({% date_start date_filter_3 %} AS DATETIME) THEN "P.Comparable"
+              WHEN ${magasins.date_ouv_raw} < {% date_start date_filter_3 %} THEN "P.Comparable"
               ELSE "P. non Comparable"
             END )
         END
