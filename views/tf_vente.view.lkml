@@ -201,7 +201,7 @@ view: tf_vente {
   dimension_group: diff_date {
     type: duration
     intervals: [year]
-    sql_start: ${magasins.date_ouv_date::date} ;;
+    sql_start: ${magasins.date_ouv_date::datetime} ;;
     sql_end: {% date_end date_filter %} ;;
   }
 
