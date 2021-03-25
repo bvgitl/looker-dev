@@ -2,10 +2,10 @@ view: pdt_commandes_digitales {
     derived_table: {
       sql: select
         c.cd_magasin AS cd_magasin ,
-        c.dte_commande AS dte_commande ,
+        CAST(DATETIME_TRUNC(c.dte_commande, DAY) AS DATE) AS dte_commande ,
         pc.Quantite_commandee AS Quantite_commandee ,
         pc.Tarif_Produit_HT AS Tarif_Produit_HT ,
-        row_number() OVER(ORDER BY c.cd_magasin, c.dte_commande) AS primary_key ,
+        row_number() OVER(ORDER BY c.cd_magasin, c.dte_commande) AS primary_key
 
   from `bv-prod.Matillion_Perm_Table.produit_commande` AS pc
 
