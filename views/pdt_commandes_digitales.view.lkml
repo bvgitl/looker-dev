@@ -30,7 +30,7 @@ view: pdt_commandes_digitales {
 
     dimension_group: dte_commande {
       type: time
-      timeframes: [date, week, month, quarter, year, raw, fiscal_month_num, fiscal_quarter, fiscal_quarter_of_year, fiscal_year]
+      timeframes: [date, week, month, quarter, year, raw, month_name, fiscal_month_num, fiscal_quarter, fiscal_quarter_of_year, fiscal_year]
       datatype: datetime
       sql: ${TABLE}.dte_commande ;;
     }

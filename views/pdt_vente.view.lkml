@@ -36,7 +36,7 @@ view: pdt_vente {
 
     dimension_group: dte_vte {
       type: time
-      timeframes: [date, week, month, quarter, year, raw, fiscal_month_num, fiscal_quarter, fiscal_quarter_of_year, fiscal_year]
+      timeframes: [date, week, month, quarter, year, raw, month_name, fiscal_month_num, fiscal_quarter, fiscal_quarter_of_year, fiscal_year]
       datatype: date
       sql: ${TABLE}.Dte_Vte ;;
     }
