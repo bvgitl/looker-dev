@@ -1,4 +1,4 @@
-view: pdt_commandes_mag {
+view: pdt_commandes_digitales {
     derived_table: {
       sql: select
         c.cd_magasin AS cd_magasin ,
@@ -13,6 +13,7 @@ view: pdt_commandes_mag {
 
   ON pc.cd_commande = c.cd_commande
  ;;
+      datagroup_trigger: bv_vente_digitale_datagroup
     }
 
     dimension: primary_key {
@@ -29,6 +30,14 @@ view: pdt_commandes_mag {
 
     dimension_group: dte_commande {
       type: time
+      timeframes: [
+        raw,
+        date,
+        week,
+        month,
+        quarter,
+        year
+      ]
       datatype: datetime
       sql: ${TABLE}.dte_commande ;;
     }
@@ -45,6 +54,6 @@ view: pdt_commandes_mag {
 
 
     set: detail {
-      fields: [cd_magasin, dte_commande_time, quantite_commandee, tarif_produit_ht, primary_key]
+      fields: [cd_magasin, quantite_commandee, tarif_produit_ht, primary_key]
     }
 }

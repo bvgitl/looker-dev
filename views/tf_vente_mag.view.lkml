@@ -131,8 +131,47 @@ view: tf_vente_mag {
     sql: ${TABLE}.Val_Achat_Gbl ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
+########################## Calcul global des KPIs ################################
+
+  measure: sum_ca_ht {
+    type: sum
+    value_format_name: eur
+    sql: ${ca_ht} ;;
+  }
+
+  measure: count_dte_vente {
+    value_format_name: decimal_0
+    type: count_distinct
+    sql: ${TABLE}.dte_vente ;;
+  }
+
+  dimension: tot_tx_marge_brute {
+    type: number
+    value_format_name: percent_2
+    sql:  1.0 * ${marge_brute}/NULLIF(${ca_ht},0) ;;
+  }
+
+  measure: sum_marge_brute {
+    value_format_name: eur
+    type: sum
+    sql: ${marge_brute} ;;
+  }
+
+  measure: sum_nb_ticket {
+    value_format_name: decimal_0
+    type: sum
+    sql: ${nb_ticket} ;;
+  }
+
+  measure: sum_qtite {
+    value_format_name: decimal_0
+    type: sum
+    sql: ${qtite};;
+  }
+
+  measure: sum_val_achat_gbl {
+    value_format_name: eur
+    type: sum
+    sql: ${val_achat_gbl} ;;
   }
 }

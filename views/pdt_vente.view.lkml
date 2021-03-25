@@ -20,6 +20,7 @@ view: pdt_vente {
         row_number() OVER(ORDER BY CD_SITE_EXT, DTE_VENTE, ID_ARTICLE, TYP_VENTE) AS primary_key
   from `bv-prod.Matillion_Perm_Table.GOOGLE_SHEET`
  ;;
+      datagroup_trigger: bv_vente_datagroup
     }
 
   dimension: primary_key {
@@ -696,13 +697,6 @@ view: pdt_vente {
     type: number
     sql: 1.0 * (${sum_CA_select_mois_N1}-${sum_CA_select_mois_N2})/NULLIF(${sum_CA_select_mois_N2},0);;
   }
-
-  #measure: prog_CA_drive_select_mois_N1 {
-  #  label: "prog CA Drive n-1"
-  #  value_format_name: percent_2
-  #  type: number
-  #  sql: 1.0 * (${sum_CA_drive_select_mois_N1}-${sum_CA_drive_select_mois_N2})/NULLIF(${sum_CA_drive_select_mois_N2},0);;
-  #}
 
   measure: prog_marge_select_mois_N1 {
     label: "prog marge n-1"
