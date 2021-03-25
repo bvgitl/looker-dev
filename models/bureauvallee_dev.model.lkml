@@ -28,6 +28,14 @@ explore: tf_vente {
   }
 }
 
+explore: pdt_vente {
+  join: magasins {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${pdt_vente.cd_site_ext}=${magasins.cd_comptable} ;;
+  }
+}
+
 explore: tf_vente_mag {}
 
 explore: ventes_devise {}
